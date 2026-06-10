@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MinglesAdda Upload</title>
+  <style>
+    body{
+      font-family:Arial;
+      text-align:center;
+      background:#111;
+      color:white;
+      padding:30px;
+    }
+
+    input{
+      margin:20px;
+    }
+
+    img{
+      max-width:90%;
+      margin-top:20px;
+      border-radius:10px;
+    }
+
+    .box{
+      background:#222;
+      padding:20px;
+      border-radius:10px;
+    }
+
+    button{
+      padding:10px 20px;
+      background:#00b894;
+      border:none;
+      color:white;
+      border-radius:5px;
+      font-size:16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>MinglesAdda Image Upload</h1>
+
+  <input type="file" id="fileInput">
+
+  <br>
+
+  <button onclick="uploadImage()">Generate Link</button>
+
+  <div id="output"></div>
+</div>
+
+<script>
+function uploadImage() {
+
+  const file = document.getElementById('fileInput').files[0];
+
+  if(!file){
+    alert("Select image first");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    document.getElementById("output").innerHTML = `
+      <h3>Uploaded Image</h3>
+      <img src="${e.target.result}">
+      <br><br>
+      <textarea style="width:90%;height:100px;">${e.target.result}</textarea>
+    `;
+  }
+
+  reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
